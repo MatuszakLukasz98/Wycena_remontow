@@ -24,7 +24,7 @@ public class EstimateController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Estimate>>  getAllEstimates() {
+    public ResponseEntity<List<EstimateDto>>  getAllEstimates() {
         return ResponseEntity.ok(estimateService.getAllEstimates());
     }
 
@@ -38,6 +38,17 @@ public class EstimateController {
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EstimateDto> setAccepted(@Valid @RequestBody EstimateDto estimateDto, @PathVariable int id) {
+        Estimate accepted = estimateService.acceptEstimate(id);
+        return ResponseEntity.ok(new EstimateDto(accepted));
+    }
+
+    @GetMapping("/contractor/{id}")
+    public ResponseEntity<List<EstimateDto>> getAllEstimatesByContractorId(@PathVariable int id) {
+        return ResponseEntity.ok(estimateService.getEstimatesByCustomerWorksAssignmentId(id));
     }
 
 

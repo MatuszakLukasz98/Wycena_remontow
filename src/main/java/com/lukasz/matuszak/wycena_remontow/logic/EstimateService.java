@@ -1,5 +1,6 @@
 package com.lukasz.matuszak.wycena_remontow.logic;
 
+import com.lukasz.matuszak.wycena_remontow.dto.CustomerWorkAssignmentDto;
 import com.lukasz.matuszak.wycena_remontow.dto.EstimateDto;
 import com.lukasz.matuszak.wycena_remontow.model.Contractor;
 import com.lukasz.matuszak.wycena_remontow.model.CustomerWorkAssignment;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EstimateService {
@@ -48,10 +50,10 @@ public class EstimateService {
         return estimateRepository.save(estimate);
     }
 
-    public List<Estimate> getAllEstimates() {
-        return estimateRepository.findAll();
+    public List<EstimateDto> getAllEstimates() {
+        return estimateRepository.findAll().stream().map(EstimateDto::new).collect(Collectors.toList());
     }
-    public List<Estimate> getEstimatesByCustomerWorksAssignmentId(int customerWorksAssignmentId) {
-        return estimateRepository.getEstimatesByAssignmentId(customerWorksAssignmentId);
+    public List<EstimateDto> getEstimatesByCustomerWorksAssignmentId(int customerWorksAssignmentId) {
+        return estimateRepository.getEstimatesByAssignmentId(customerWorksAssignmentId).stream().map(EstimateDto::new).collect(Collectors.toList());
     }
 }
