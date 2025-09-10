@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "customer_work_assignment")
 @AllArgsConstructor
@@ -32,4 +35,7 @@ public class CustomerWorkAssignment {
     @Positive
     private Double area;
     private boolean active = true;
+
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Estimate> estimates = new ArrayList<>();
 }

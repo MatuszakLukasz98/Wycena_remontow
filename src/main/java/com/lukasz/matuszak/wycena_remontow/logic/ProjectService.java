@@ -29,7 +29,7 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project updateProject(Integer id, Project project) {
+    public Project updateProject(int id, Project project) {
         return projectRepository.findById(id).map(project1 -> {
             project1.setName(project.getName());
             project1.setDescription(project.getDescription());
@@ -40,7 +40,7 @@ public class ProjectService {
         }).orElseThrow(() -> new IllegalArgumentException("Project not found"));
     }
 
-    public boolean canBeClose(Integer id) {
+    public boolean canBeClose(int id) {
         Project project = projectRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Project not found"));
         return project.getAssignments().stream().allMatch(assignment -> !assignment.isActive());
     }

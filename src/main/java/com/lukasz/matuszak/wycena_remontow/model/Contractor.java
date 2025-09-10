@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,8 +26,8 @@ public class Contractor {
     private String surname;
     private String email;
     private String nip;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contractor")
-    private Set<Project> projects;
+    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Estimate> estimates = new ArrayList<>();
 
 
 }
