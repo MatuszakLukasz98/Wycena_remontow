@@ -33,7 +33,7 @@ public class CustomerWorkAssignment {
 
     @NotNull
     @Positive
-    private Double area;
+    private double area;
     private boolean active = true;
 
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
